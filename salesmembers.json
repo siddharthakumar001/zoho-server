@@ -1,0 +1,220 @@
+[{
+  "_id": {
+    "$oid": "68a6a101e6fddf2fe4750fe6"
+  },
+  "name": "Vikas Sharma",
+  "email": "vikas@gmail.com",
+  "phone": "9876543212",
+  "password": "$2b$10$WZOrL90qVn307v0jqZuqDu5xPx2EpmKiH1Dlrv7AfpIRTOb3rp36y",
+  "monthlyTarget": 100000,
+  "isActive": true,
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2025-08-21T04:30:57.185Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-28T06:04:02.040Z"
+  },
+  "__v": 0,
+  "topLine": 1500000
+},
+{
+  "_id": {
+    "$oid": "68a6a18ae6fddf2fe4750ff0"
+  },
+  "name": "Pawan Kumar",
+  "email": "pawan@gmail.com",
+  "phone": "1234567890",
+  "password": "$2b$10$Plqiq6zsawVmazlXMOkpueGWeNBtMIhxYLXSDfSEZvGjn1E2/6UZq",
+  "monthlyTarget": 2000000,
+  "isActive": true,
+  "isAdmin": true,
+  "createdAt": {
+    "$date": "2025-08-21T04:33:14.870Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-28T10:36:12.886Z"
+  },
+  "__v": 0,
+  "topLine": 5000000
+},
+{
+  "_id": {
+    "$oid": "68a6a610e6fddf2fe4751037"
+  },
+  "name": "Babita",
+  "email": "babita@gmail.com",
+  "phone": "8800880012",
+  "password": "$2b$10$kv44cLwkittkjQ2JLrl.A.QYy1vxOeSnP1Gxhzuk/.lLTV55M2knu",
+  "monthlyTarget": 150000,
+  "isActive": true,
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2025-08-21T04:52:32.972Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-28T06:03:27.990Z"
+  },
+  "__v": 0,
+  "topLine": 1000000
+},
+{
+  "_id": {
+    "$oid": "68a6a633e6fddf2fe475103e"
+  },
+  "name": "Bibhas Sinha",
+  "email": "bibhas@gmail.com",
+  "phone": "8800880011",
+  "password": "$2b$10$28yaz60YuC50ROSHPKYCZ.2DXdonSyY14zrw6jxwtDS1Ir7GDSRuW",
+  "monthlyTarget": 300000,
+  "isActive": true,
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2025-08-21T04:53:07.383Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-28T06:03:14.594Z"
+  },
+  "__v": 0,
+  "topLine": 5000000
+},
+{
+  "_id": {
+    "$oid": "68a6a654e6fddf2fe4751045"
+  },
+  "name": "Chirag Khurana",
+  "email": "chirag@gmail.com",
+  "phone": "8800880022",
+  "password": "$2b$10$WZGNMQcrzE4AILKYNYb.fumeQyZPvy945nlzEyd/eGnABvTaGjACG",
+  "monthlyTarget": 500000,
+  "isActive": true,
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2025-08-21T04:53:40.201Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-28T06:03:01.497Z"
+  },
+  "__v": 0,
+  "topLine": 10000000
+},
+{
+  "_id": {
+    "$oid": "68a6a68be6fddf2fe4751057"
+  },
+  "name": "Jyoti Deswal",
+  "email": "jyoti@gmail.com",
+  "phone": "8800880054",
+  "password": "$2b$10$dcJ64FIKNhSCfS4sRv4MCOXpWrKHk/pgkBmJBexkIAV0FE27nwnv6",
+  "monthlyTarget": 200000,
+  "isActive": true,
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2025-08-21T04:54:35.558Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-28T06:02:43.095Z"
+  },
+  "__v": 0,
+  "topLine": 2000000
+},
+{
+  "_id": {
+    "$oid": "68a6a69fe6fddf2fe475105e"
+  },
+  "name": "Pankaj",
+  "email": "pankaj@gmail.com",
+  "phone": "8800880088",
+  "password": "$2b$10$ExWdKXyBjRb7SrEuMbLmZOd.Xl9w/xmzePWXAvcsjbJGDf6dvQStu",
+  "monthlyTarget": 400000,
+  "isActive": true,
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2025-08-21T04:54:55.024Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-28T06:02:26.815Z"
+  },
+  "__v": 0,
+  "topLine": 4000000
+},
+{
+  "_id": {
+    "$oid": "68a6a6d8e6fddf2fe4751074"
+  },
+  "name": "Sonu Sahu",
+  "email": "sonu@gmail.com",
+  "phone": "8800880800",
+  "password": "$2b$10$fVpeHOdPne0qaWl6XqGJO.FEo9Kfyf9bTQQRwv3JHqcPxaK2FJ/s2",
+  "monthlyTarget": 4000000,
+  "isActive": true,
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2025-08-21T04:55:52.682Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-28T06:01:48.266Z"
+  },
+  "__v": 0,
+  "topLine": 20000000
+},
+{
+  "_id": {
+    "$oid": "68a6fe6a78c0b0418aed44cb"
+  },
+  "name": "Varun Singh",
+  "email": "varun@gmail.com",
+  "phone": "8765432123",
+  "password": "$2b$10$keLUCNe1JD9LS5tn86A7FOt5xxkSs/O2kIQrLcHtydg3ntX7MaxPC",
+  "monthlyTarget": 20000000,
+  "isActive": true,
+  "isAdmin": true,
+  "createdAt": {
+    "$date": "2025-08-21T11:09:30.585Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-28T06:01:26.968Z"
+  },
+  "__v": 0,
+  "topLine": 50000000
+},
+{
+  "_id": {
+    "$oid": "68ac2d86cd53b7bb817f796a"
+  },
+  "name": "Vikash Singh",
+  "email": "vikassingh@gmail.com",
+  "phone": "5837993874",
+  "password": "$2b$10$ENsOuMcy1JyLvOcdWNmMm.LBt3MTzuRRB4ygRBJvXS9aopKLYo0x2",
+  "monthlyTarget": 3000000,
+  "isActive": true,
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2025-08-25T09:31:50.924Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-28T06:01:06.150Z"
+  },
+  "__v": 0,
+  "topLine": 10000000
+},
+{
+  "_id": {
+    "$oid": "68ad52c7e50fb844285725df"
+  },
+  "name": "Sejal Maurya",
+  "email": "sejal@gmail.com",
+  "phone": "8800880822",
+  "password": "$2b$10$lrkkZEuHe0lPfqTsRlGgQe94/0xiUffgiZ1V87JxyHNyf.gth49tW",
+  "monthlyTarget": 1000000,
+  "isActive": true,
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2025-08-26T06:23:03.479Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-28T06:00:51.214Z"
+  },
+  "__v": 0,
+  "topLine": 5000000
+}]

@@ -14,18 +14,17 @@ const router = express.Router();
 
 // Invoices
 router.get('/invoices', getInvoices);
-router.get('/invoices/:id', getInvoiceById);
+router.get('/invoices/:id', getInvoiceById); // Make sure :id is properly defined
 router.get('/dashboard', getDashboard);
-
 
 // Purchase Orders
 router.get('/purchase-orders', getPurchaseOrders);
-router.get('/purchase-orders/:id', getPurchaseOrderById);
+router.get('/purchase-orders/:id', getPurchaseOrderById); // Make sure :id is properly defined
 
 router.get('/purchaseorders/by-ref', getPurchaseOrdersByRef);
 
 // Bills
 router.get('/bills', getBills);
-router.get('/bills/:id', getBillById);
+router.get('/bills/:id', getBillById); // Make sure :id is properly defined
 
 export default router;

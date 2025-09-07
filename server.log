@@ -1,0 +1,1040 @@
+[dotenv@17.2.0] injecting env (0) from .env (tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`)
+[dotenv@17.2.0] injecting env (0) from .env (tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild)
+🚀 Starting authentication server with database...
+✅ MongoDB connected successfully
+📊 Database: test
+
+🎉 Server running successfully!
+📍 URL: http://localhost:3001
+🌐 CORS: Accepting all origins for development
+💾 Database: test
+
+📋 Available endpoints:
+   GET  /health
+   GET  /api/test
+   GET  /api/debug/users
+   POST /api/sales/auth/login
+   GET  /api/admin/sales-members
+   PUT  /api/admin/sales-members/:id
+   GET  /api/invoices
+   GET  /api/purchaseorders
+   GET  /api/dashboard/summary
+
+🔧 Test your frontend now!
+   Frontend should connect to: http://localhost:3001
+
+🔑 Login credentials:
+   Email: admin@gmail.com
+   Password: Admin@123
+
+🐛 Debug users: http://localhost:3001/api/debug/users
+📧 GET /api/purchaseorders?status=open&limit=3 from no-origin
+❌ Authentication failed for: /api/purchaseorders?status=open&limit=3 invalid signature
+📧 GET /health from no-origin
+✅ Health check requested
+📧 OPTIONS /api/sales/auth/login from http://localhost:3000
+🔄 Handling preflight request
+📧 POST /api/sales/auth/login from http://localhost:3000
+🔐 Login attempt received
+📦 Request body: { identifier: 'admin@gmail.com', password: 'Admin@123' }
+🌐 Origin: http://localhost:3000
+📧 Email extracted: admin@gmail.com
+🔑 Password provided: true
+🔍 Looking for user in database...
+✅ User found: admin@gmail.com
+👤 User details: {
+  name: 'Admin',
+  email: 'admin@gmail.com',
+  isActive: true,
+  isAdmin: true
+}
+🔐 Comparing password...
+✅ Password matches
+✅ Login successful for: admin@gmail.com
+🍪 Cookie set: accessTokenSales
+📧 OPTIONS /api/sales/auth/me from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/sales/auth/me from http://localhost:3000
+👤 Me endpoint requested
+🔍 Token source: cookie
+✅ Token verified for user: admin@gmail.com
+📧 GET /api/sales/auth/me from http://localhost:3000
+👤 Me endpoint requested
+🔍 Token source: cookie
+✅ Token verified for user: admin@gmail.com
+📧 OPTIONS /api/admin/sales-members?page=1&limit=10000 from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/sales/auth/me from http://localhost:3000
+👤 Me endpoint requested
+🔍 Token source: cookie
+✅ Token verified for user: admin@gmail.com
+📧 OPTIONS /api/invoices?page=1&limit=10&date=2025-09-01&month=2025-09 from http://localhost:3000
+🔄 Handling preflight request
+📧 OPTIONS /api/purchaseorders?page=1&limit=10&date=2025-09-01&month=2025-09 from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/invoices?page=1&limit=10&date=2025-09-01&month=2025-09 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/invoices?page=1&limit=10&date=2025-09-01&month=2025-09
+📄 Invoices requested with params: { page: '1', limit: '10', date: '2025-09-01', month: '2025-09' }
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all invoices
+📅 Date filter applied: { '$gte': '2025-08-31', '$lt': '2025-09-30' }
+🔍 Final query filter: { date: { '$gte': '2025-08-31', '$lt': '2025-09-30' } }
+📊 Sort query: { date: -1, _id: -1 }
+📧 GET /api/admin/sales-members?page=1&limit=10000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/admin/sales-members?page=1&limit=10000
+📧 GET /api/purchaseorders?page=1&limit=10&date=2025-09-01&month=2025-09 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=10&date=2025-09-01&month=2025-09
+📦 Purchase orders requested with params: { page: '1', limit: '10', date: '2025-09-01', month: '2025-09' }
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-09-01
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-08-31",
+        "$lt": "2025-09-30"
+      }
+    }
+  ]
+}
+📊 Sort query: { date: -1, _id: -1 }
+✅ Found 0 purchase orders (0 total)
+✅ Found 0 invoices (0 total)
+📧 OPTIONS /api/purchaseorders?page=1&limit=25&date=2025-09-01&sortBy=date&sortOrder=desc from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/admin/sales-members?page=1&limit=10000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/admin/sales-members?page=1&limit=10000
+📧 GET /api/purchaseorders?page=1&limit=25&date=2025-09-01&sortBy=date&sortOrder=desc from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=25&date=2025-09-01&sortBy=date&sortOrder=desc
+📦 Purchase orders requested with params: {
+  page: '1',
+  limit: '25',
+  date: '2025-09-01',
+  sortBy: 'date',
+  sortOrder: 'desc'
+}
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-09-01
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-08-31",
+        "$lt": "2025-09-30"
+      }
+    }
+  ]
+}
+📊 Sort query: { date: -1, _id: -1 }
+✅ Found 0 purchase orders (0 total)
+📧 OPTIONS /api/purchaseorders?page=1&limit=25&date=2025-08-01&sortBy=date&sortOrder=desc from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/purchaseorders?page=1&limit=25&date=2025-08-01&sortBy=date&sortOrder=desc from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=25&date=2025-08-01&sortBy=date&sortOrder=desc
+📦 Purchase orders requested with params: {
+  page: '1',
+  limit: '25',
+  date: '2025-08-01',
+  sortBy: 'date',
+  sortOrder: 'desc'
+}
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-08-01
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-07-31",
+        "$lt": "2025-08-31"
+      }
+    }
+  ]
+}
+📊 Sort query: { date: -1, _id: -1 }
+✅ Found 25 purchase orders (239 total)
+📧 OPTIONS /api/purchaseorders?page=1&limit=25&date=2025-08-01&status=billed&sortBy=date&sortOrder=desc from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/purchaseorders?page=1&limit=25&date=2025-08-01&status=billed&sortBy=date&sortOrder=desc from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=25&date=2025-08-01&status=billed&sortBy=date&sortOrder=desc
+📦 Purchase orders requested with params: {
+  page: '1',
+  limit: '25',
+  date: '2025-08-01',
+  status: 'billed',
+  sortBy: 'date',
+  sortOrder: 'desc'
+}
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-08-01
+📊 Status filter applied: billed
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-07-31",
+        "$lt": "2025-08-31"
+      }
+    },
+    {
+      "$or": [
+        {
+          "status": "billed"
+        },
+        {
+          "order_status": "billed"
+        },
+        {
+          "billed_status": "billed"
+        },
+        {
+          "received_status": "billed"
+        }
+      ]
+    }
+  ]
+}
+📊 Sort query: { date: -1, _id: -1 }
+✅ Found 25 purchase orders (128 total)
+📧 OPTIONS /api/purchaseorders?page=1&limit=25&date=2025-08-01&status=open&sortBy=date&sortOrder=desc from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/purchaseorders?page=1&limit=25&date=2025-08-01&status=open&sortBy=date&sortOrder=desc from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=25&date=2025-08-01&status=open&sortBy=date&sortOrder=desc
+📦 Purchase orders requested with params: {
+  page: '1',
+  limit: '25',
+  date: '2025-08-01',
+  status: 'open',
+  sortBy: 'date',
+  sortOrder: 'desc'
+}
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-08-01
+📊 Status filter applied: open
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-07-31",
+        "$lt": "2025-08-31"
+      }
+    },
+    {
+      "$or": [
+        {
+          "status": "open"
+        },
+        {
+          "order_status": "open"
+        },
+        {
+          "billed_status": "open"
+        },
+        {
+          "received_status": "open"
+        }
+      ]
+    }
+  ]
+}
+📊 Sort query: { date: -1, _id: -1 }
+✅ Found 25 purchase orders (97 total)
+📧 OPTIONS /api/purchaseorders?page=1&limit=25&date=2025-08-01&status=approved&sortBy=date&sortOrder=desc from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/purchaseorders?page=1&limit=25&date=2025-08-01&status=approved&sortBy=date&sortOrder=desc from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=25&date=2025-08-01&status=approved&sortBy=date&sortOrder=desc
+📦 Purchase orders requested with params: {
+  page: '1',
+  limit: '25',
+  date: '2025-08-01',
+  status: 'approved',
+  sortBy: 'date',
+  sortOrder: 'desc'
+}
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-08-01
+📊 Status filter applied: approved
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-07-31",
+        "$lt": "2025-08-31"
+      }
+    },
+    {
+      "$or": [
+        {
+          "status": "approved"
+        },
+        {
+          "order_status": "approved"
+        },
+        {
+          "billed_status": "approved"
+        },
+        {
+          "received_status": "approved"
+        }
+      ]
+    }
+  ]
+}
+📊 Sort query: { date: -1, _id: -1 }
+✅ Found 2 purchase orders (2 total)
+📧 OPTIONS /api/purchaseorders?page=1&limit=25&date=2025-08-01&status=closed&sortBy=date&sortOrder=desc from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/purchaseorders?page=1&limit=25&date=2025-08-01&status=closed&sortBy=date&sortOrder=desc from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=25&date=2025-08-01&status=closed&sortBy=date&sortOrder=desc
+📦 Purchase orders requested with params: {
+  page: '1',
+  limit: '25',
+  date: '2025-08-01',
+  status: 'closed',
+  sortBy: 'date',
+  sortOrder: 'desc'
+}
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-08-01
+📊 Status filter applied: closed
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-07-31",
+        "$lt": "2025-08-31"
+      }
+    },
+    {
+      "$or": [
+        {
+          "status": "closed"
+        },
+        {
+          "order_status": "closed"
+        },
+        {
+          "billed_status": "closed"
+        },
+        {
+          "received_status": "closed"
+        }
+      ]
+    }
+  ]
+}
+📊 Sort query: { date: -1, _id: -1 }
+✅ Found 25 purchase orders (128 total)
+📧 OPTIONS /api/purchaseorders?page=1&limit=25&date=2025-08-01&status=cancelled&sortBy=date&sortOrder=desc from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/purchaseorders?page=1&limit=25&date=2025-08-01&status=cancelled&sortBy=date&sortOrder=desc from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=25&date=2025-08-01&status=cancelled&sortBy=date&sortOrder=desc
+📦 Purchase orders requested with params: {
+  page: '1',
+  limit: '25',
+  date: '2025-08-01',
+  status: 'cancelled',
+  sortBy: 'date',
+  sortOrder: 'desc'
+}
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-08-01
+📊 Status filter applied: cancelled
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-07-31",
+        "$lt": "2025-08-31"
+      }
+    },
+    {
+      "$or": [
+        {
+          "status": "cancelled"
+        },
+        {
+          "order_status": "cancelled"
+        },
+        {
+          "billed_status": "cancelled"
+        },
+        {
+          "received_status": "cancelled"
+        }
+      ]
+    }
+  ]
+}
+📊 Sort query: { date: -1, _id: -1 }
+✅ Found 0 purchase orders (0 total)
+📧 OPTIONS /api/purchaseorders?page=1&limit=25&date=2025-08-01&status=draft&sortBy=date&sortOrder=desc from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/purchaseorders?page=1&limit=25&date=2025-08-01&status=draft&sortBy=date&sortOrder=desc from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=25&date=2025-08-01&status=draft&sortBy=date&sortOrder=desc
+📦 Purchase orders requested with params: {
+  page: '1',
+  limit: '25',
+  date: '2025-08-01',
+  status: 'draft',
+  sortBy: 'date',
+  sortOrder: 'desc'
+}
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-08-01
+📊 Status filter applied: draft
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-07-31",
+        "$lt": "2025-08-31"
+      }
+    },
+    {
+      "$or": [
+        {
+          "status": "draft"
+        },
+        {
+          "order_status": "draft"
+        },
+        {
+          "billed_status": "draft"
+        },
+        {
+          "received_status": "draft"
+        }
+      ]
+    }
+  ]
+}
+📊 Sort query: { date: -1, _id: -1 }
+✅ Found 12 purchase orders (12 total)
+📧 OPTIONS /api/purchaseorders?page=1&limit=25&date=2025-08-01&sortBy=vendor_name&sortOrder=desc from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/purchaseorders?page=1&limit=25&date=2025-08-01&sortBy=vendor_name&sortOrder=desc from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=25&date=2025-08-01&sortBy=vendor_name&sortOrder=desc
+📦 Purchase orders requested with params: {
+  page: '1',
+  limit: '25',
+  date: '2025-08-01',
+  sortBy: 'vendor_name',
+  sortOrder: 'desc'
+}
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-08-01
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-07-31",
+        "$lt": "2025-08-31"
+      }
+    }
+  ]
+}
+📊 Sort query: { vendor_name: -1, _id: -1 }
+✅ Found 25 purchase orders (239 total)
+📧 OPTIONS /api/purchaseorders?page=1&limit=25&date=2025-08-01&sortBy=vendor_name&sortOrder=asc from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/purchaseorders?page=1&limit=25&date=2025-08-01&sortBy=vendor_name&sortOrder=asc from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=25&date=2025-08-01&sortBy=vendor_name&sortOrder=asc
+📦 Purchase orders requested with params: {
+  page: '1',
+  limit: '25',
+  date: '2025-08-01',
+  sortBy: 'vendor_name',
+  sortOrder: 'asc'
+}
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-08-01
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-07-31",
+        "$lt": "2025-08-31"
+      }
+    }
+  ]
+}
+📊 Sort query: { vendor_name: 1, _id: 1 }
+✅ Found 25 purchase orders (239 total)
+📧 OPTIONS /api/purchaseorders?page=1&limit=25&date=2025-08-01&search=A&sortBy=vendor_name&sortOrder=asc from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/purchaseorders?page=1&limit=25&date=2025-08-01&search=A&sortBy=vendor_name&sortOrder=asc from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=25&date=2025-08-01&search=A&sortBy=vendor_name&sortOrder=asc
+📦 Purchase orders requested with params: {
+  page: '1',
+  limit: '25',
+  date: '2025-08-01',
+  search: 'A',
+  sortBy: 'vendor_name',
+  sortOrder: 'asc'
+}
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-08-01
+🔍 Search filter applied for: A
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-07-31",
+        "$lt": "2025-08-31"
+      }
+    },
+    {
+      "$or": [
+        {
+          "purchaseorder_number": {}
+        },
+        {
+          "vendor_name": {}
+        },
+        {
+          "company_name": {}
+        },
+        {
+          "cf_sales_person": {}
+        },
+        {
+          "cf_sales_person_unformatted": {}
+        },
+        {
+          "reference_number": {}
+        }
+      ]
+    }
+  ]
+}
+📊 Sort query: { vendor_name: 1, _id: 1 }
+✅ Found 25 purchase orders (238 total)
+📧 OPTIONS /api/purchaseorders?page=1&limit=25&date=2025-08-01&search=Ag&sortBy=vendor_name&sortOrder=asc from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/purchaseorders?page=1&limit=25&date=2025-08-01&search=Ag&sortBy=vendor_name&sortOrder=asc from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=25&date=2025-08-01&search=Ag&sortBy=vendor_name&sortOrder=asc
+📦 Purchase orders requested with params: {
+  page: '1',
+  limit: '25',
+  date: '2025-08-01',
+  search: 'Ag',
+  sortBy: 'vendor_name',
+  sortOrder: 'asc'
+}
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-08-01
+🔍 Search filter applied for: Ag
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-07-31",
+        "$lt": "2025-08-31"
+      }
+    },
+    {
+      "$or": [
+        {
+          "purchaseorder_number": {}
+        },
+        {
+          "vendor_name": {}
+        },
+        {
+          "company_name": {}
+        },
+        {
+          "cf_sales_person": {}
+        },
+        {
+          "cf_sales_person_unformatted": {}
+        },
+        {
+          "reference_number": {}
+        }
+      ]
+    }
+  ]
+}
+📊 Sort query: { vendor_name: 1, _id: 1 }
+✅ Found 9 purchase orders (9 total)
+📧 OPTIONS /api/admin/sales-members? from http://localhost:3000
+🔄 Handling preflight request
+📧 OPTIONS /api/invoices-only?date=2025-09-01&limit=1000 from http://localhost:3000
+🔄 Handling preflight request
+📧 OPTIONS /api/pi-summary?date=2025-09-01 from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/admin/sales-members? from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/admin/sales-members?
+📧 GET /api/invoices-only?date=2025-09-01&limit=1000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/invoices-only?date=2025-09-01&limit=1000
+📄 Invoices-only requested with params: { date: '2025-09-01', limit: '1000' }
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all invoices
+📅 Date filter applied: { '$gte': '2025-08-31', '$lt': '2025-09-30' }
+🔍 Final query filter: { date: { '$gte': '2025-08-31', '$lt': '2025-09-30' } }
+📊 Sort query: { date: -1, _id: -1 }
+📧 GET /api/pi-summary?date=2025-09-01 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/pi-summary?date=2025-09-01
+✅ Found 0 invoices (0 total)
+📧 OPTIONS /api/invoices-only?date=2025-08-01&limit=1000 from http://localhost:3000
+🔄 Handling preflight request
+📧 OPTIONS /api/pi-summary?date=2025-08-01 from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/invoices-only?date=2025-08-01&limit=1000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/invoices-only?date=2025-08-01&limit=1000
+📄 Invoices-only requested with params: { date: '2025-08-01', limit: '1000' }
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all invoices
+📅 Date filter applied: { '$gte': '2025-07-31', '$lt': '2025-08-31' }
+🔍 Final query filter: { date: { '$gte': '2025-07-31', '$lt': '2025-08-31' } }
+📊 Sort query: { date: -1, _id: -1 }
+📧 GET /api/pi-summary?date=2025-08-01 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/pi-summary?date=2025-08-01
+✅ Found 100 invoices (344 total)
+📧 OPTIONS /api/invoices-only?date=2025-08-01&personName=Varun+Singh&limit=1000 from http://localhost:3000
+🔄 Handling preflight request
+📧 OPTIONS /api/pi-summary?date=2025-08-01&personName=Varun+Singh from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/invoices-only?date=2025-08-01&personName=Varun+Singh&limit=1000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/invoices-only?date=2025-08-01&personName=Varun+Singh&limit=1000
+📄 Invoices-only requested with params: { date: '2025-08-01', personName: 'Varun Singh', limit: '1000' }
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all invoices
+🔍 Admin filtering by salesperson: Varun Singh
+📅 Date filter applied: { '$gte': '2025-07-31', '$lt': '2025-08-31' }
+🔍 Final query filter: {
+  '$or': [
+    { salesperson_name: /^\s*Varun\s+Singh\s*$/i },
+    { salesperson: /^\s*Varun\s+Singh\s*$/i },
+    { cf_sales_person: /^\s*Varun\s+Singh\s*$/i },
+    { cf_sales_person_unformatted: /^\s*Varun\s+Singh\s*$/i }
+  ],
+  date: { '$gte': '2025-07-31', '$lt': '2025-08-31' }
+}
+📊 Sort query: { date: -1, _id: -1 }
+📧 GET /api/pi-summary?date=2025-08-01&personName=Varun+Singh from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/pi-summary?date=2025-08-01&personName=Varun+Singh
+✅ Found 36 invoices (36 total)
+📧 OPTIONS /api/invoices-only?date=2025-08-01&personName=Chirag+Khurana&limit=1000 from http://localhost:3000
+🔄 Handling preflight request
+📧 OPTIONS /api/pi-summary?date=2025-08-01&personName=Chirag+Khurana from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/invoices-only?date=2025-08-01&personName=Chirag+Khurana&limit=1000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/invoices-only?date=2025-08-01&personName=Chirag+Khurana&limit=1000
+📄 Invoices-only requested with params: { date: '2025-08-01', personName: 'Chirag Khurana', limit: '1000' }
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all invoices
+🔍 Admin filtering by salesperson: Chirag Khurana
+📅 Date filter applied: { '$gte': '2025-07-31', '$lt': '2025-08-31' }
+🔍 Final query filter: {
+  '$or': [
+    { salesperson_name: /^\s*Chirag\s+Khurana\s*$/i },
+    { salesperson: /^\s*Chirag\s+Khurana\s*$/i },
+    { cf_sales_person: /^\s*Chirag\s+Khurana\s*$/i },
+    { cf_sales_person_unformatted: /^\s*Chirag\s+Khurana\s*$/i }
+  ],
+  date: { '$gte': '2025-07-31', '$lt': '2025-08-31' }
+}
+📊 Sort query: { date: -1, _id: -1 }
+📧 GET /api/pi-summary?date=2025-08-01&personName=Chirag+Khurana from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/pi-summary?date=2025-08-01&personName=Chirag+Khurana
+✅ Found 12 invoices (12 total)
+📧 POST /api/sales/auth/login from no-origin
+🔐 Login attempt received
+📦 Request body: { email: 'admin@gmail.com', password: 'Admin@123' }
+🌐 Origin: undefined
+📧 Email extracted: admin@gmail.com
+🔑 Password provided: true
+🔍 Looking for user in database...
+✅ User found: admin@gmail.com
+👤 User details: {
+  name: 'Admin',
+  email: 'admin@gmail.com',
+  isActive: true,
+  isAdmin: true
+}
+🔐 Comparing password...
+✅ Password matches
+✅ Login successful for: admin@gmail.com
+🍪 Cookie set: accessTokenSales
+📧 OPTIONS /api/invoices-only?date=2025-09-01&limit=1000 from http://localhost:3000
+🔄 Handling preflight request
+📧 OPTIONS /api/pi-summary?date=2025-09-01 from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/invoices-only?date=2025-09-01&limit=1000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/invoices-only?date=2025-09-01&limit=1000
+📄 Invoices-only requested with params: { date: '2025-09-01', limit: '1000' }
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all invoices
+📅 Date filter applied: { '$gte': '2025-08-31', '$lt': '2025-09-30' }
+🔍 Final query filter: { date: { '$gte': '2025-08-31', '$lt': '2025-09-30' } }
+📊 Sort query: { date: -1, _id: -1 }
+📧 GET /api/pi-summary?date=2025-09-01 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/pi-summary?date=2025-09-01
+✅ Found 0 invoices (0 total)
+📧 OPTIONS /api/admin/sales-members?page=1&limit=10000 from http://localhost:3000
+🔄 Handling preflight request
+📧 OPTIONS /api/purchaseorders?page=1&limit=25&date=2025-09-01&sortBy=date&sortOrder=desc from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/admin/sales-members?page=1&limit=10000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/admin/sales-members?page=1&limit=10000
+📧 GET /api/purchaseorders?page=1&limit=25&date=2025-09-01&sortBy=date&sortOrder=desc from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=25&date=2025-09-01&sortBy=date&sortOrder=desc
+📦 Purchase orders requested with params: {
+  page: '1',
+  limit: '25',
+  date: '2025-09-01',
+  sortBy: 'date',
+  sortOrder: 'desc'
+}
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-09-01
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-08-31",
+        "$lt": "2025-09-30"
+      }
+    }
+  ]
+}
+📊 Sort query: { date: -1, _id: -1 }
+✅ Found 0 purchase orders (0 total)
+📧 OPTIONS /api/invoices-only?date=2025-08-01&limit=1000 from http://localhost:3000
+🔄 Handling preflight request
+📧 OPTIONS /api/pi-summary?date=2025-08-01 from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/invoices-only?date=2025-08-01&limit=1000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/invoices-only?date=2025-08-01&limit=1000
+📄 Invoices-only requested with params: { date: '2025-08-01', limit: '1000' }
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all invoices
+📅 Date filter applied: { '$gte': '2025-07-31', '$lt': '2025-08-31' }
+🔍 Final query filter: { date: { '$gte': '2025-07-31', '$lt': '2025-08-31' } }
+📊 Sort query: { date: -1, _id: -1 }
+📧 GET /api/pi-summary?date=2025-08-01 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/pi-summary?date=2025-08-01
+✅ Found 100 invoices (344 total)
+📧 OPTIONS /api/invoices-only?date=2025-08-01&personName=Vikash+Singh&limit=1000 from http://localhost:3000
+🔄 Handling preflight request
+📧 OPTIONS /api/pi-summary?date=2025-08-01&personName=Vikash+Singh from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/invoices-only?date=2025-08-01&personName=Vikash+Singh&limit=1000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/invoices-only?date=2025-08-01&personName=Vikash+Singh&limit=1000
+📄 Invoices-only requested with params: { date: '2025-08-01', personName: 'Vikash Singh', limit: '1000' }
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all invoices
+🔍 Admin filtering by salesperson: Vikash Singh
+📅 Date filter applied: { '$gte': '2025-07-31', '$lt': '2025-08-31' }
+🔍 Final query filter: {
+  '$or': [
+    { salesperson_name: /^\s*Vikash\s+Singh\s*$/i },
+    { salesperson: /^\s*Vikash\s+Singh\s*$/i },
+    { cf_sales_person: /^\s*Vikash\s+Singh\s*$/i },
+    { cf_sales_person_unformatted: /^\s*Vikash\s+Singh\s*$/i }
+  ],
+  date: { '$gte': '2025-07-31', '$lt': '2025-08-31' }
+}
+📊 Sort query: { date: -1, _id: -1 }
+📧 GET /api/pi-summary?date=2025-08-01&personName=Vikash+Singh from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/pi-summary?date=2025-08-01&personName=Vikash+Singh
+✅ Found 100 invoices (102 total)
+📧 OPTIONS /api/admin/sales-members?page=1&limit=10000 from http://localhost:3000
+🔄 Handling preflight request
+📧 OPTIONS /api/purchaseorders?page=1&limit=25&date=2025-09-01&sortBy=date&sortOrder=desc from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/admin/sales-members?page=1&limit=10000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/admin/sales-members?page=1&limit=10000
+📧 GET /api/purchaseorders?page=1&limit=25&date=2025-09-01&sortBy=date&sortOrder=desc from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=25&date=2025-09-01&sortBy=date&sortOrder=desc
+📦 Purchase orders requested with params: {
+  page: '1',
+  limit: '25',
+  date: '2025-09-01',
+  sortBy: 'date',
+  sortOrder: 'desc'
+}
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-09-01
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-08-31",
+        "$lt": "2025-09-30"
+      }
+    }
+  ]
+}
+📊 Sort query: { date: -1, _id: -1 }
+✅ Found 0 purchase orders (0 total)
+📧 OPTIONS /api/invoices?page=1&limit=25&date=2025-09-01&month=2025-09&sortBy=date&sortOrder=desc from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/admin/sales-members?page=1&limit=10000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/admin/sales-members?page=1&limit=10000
+📧 GET /api/invoices?page=1&limit=25&date=2025-09-01&month=2025-09&sortBy=date&sortOrder=desc from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/invoices?page=1&limit=25&date=2025-09-01&month=2025-09&sortBy=date&sortOrder=desc
+📄 Invoices requested with params: {
+  page: '1',
+  limit: '25',
+  date: '2025-09-01',
+  month: '2025-09',
+  sortBy: 'date',
+  sortOrder: 'desc'
+}
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all invoices
+📅 Date filter applied: { '$gte': '2025-08-31', '$lt': '2025-09-30' }
+🔍 Final query filter: { date: { '$gte': '2025-08-31', '$lt': '2025-09-30' } }
+📊 Sort query: { date: -1, _id: -1 }
+✅ Found 0 invoices (0 total)
+📧 OPTIONS /api/admin/sales-members?page=1&limit=10&sort=-createdAt&from=2025-08-09T18%3A29%3A59.999Z&to=2025-09-07T18%3A29%3A59.999Z from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/admin/sales-members?page=1&limit=10&sort=-createdAt&from=2025-08-09T18%3A29%3A59.999Z&to=2025-09-07T18%3A29%3A59.999Z from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/admin/sales-members?page=1&limit=10&sort=-createdAt&from=2025-08-09T18%3A29%3A59.999Z&to=2025-09-07T18%3A29%3A59.999Z
+📧 OPTIONS /api/sales/auth/me from http://localhost:3000
+🔄 Handling preflight request
+📧 OPTIONS /api/admin/sales-members?page=1&limit=10000 from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/sales/auth/me from http://localhost:3000
+👤 Me endpoint requested
+🔍 Token source: cookie
+✅ Token verified for user: admin@gmail.com
+📧 OPTIONS /api/invoices?page=1&limit=10&date=2025-09-01&month=2025-09 from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/admin/sales-members?page=1&limit=10000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/admin/sales-members?page=1&limit=10000
+📧 OPTIONS /api/purchaseorders?page=1&limit=10&date=2025-09-01&month=2025-09 from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/invoices?page=1&limit=10&date=2025-09-01&month=2025-09 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/invoices?page=1&limit=10&date=2025-09-01&month=2025-09
+📄 Invoices requested with params: { page: '1', limit: '10', date: '2025-09-01', month: '2025-09' }
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all invoices
+📅 Date filter applied: { '$gte': '2025-08-31', '$lt': '2025-09-30' }
+🔍 Final query filter: { date: { '$gte': '2025-08-31', '$lt': '2025-09-30' } }
+📊 Sort query: { date: -1, _id: -1 }
+📧 GET /api/purchaseorders?page=1&limit=10&date=2025-09-01&month=2025-09 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=10&date=2025-09-01&month=2025-09
+📦 Purchase orders requested with params: { page: '1', limit: '10', date: '2025-09-01', month: '2025-09' }
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-09-01
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-08-31",
+        "$lt": "2025-09-30"
+      }
+    }
+  ]
+}
+📊 Sort query: { date: -1, _id: -1 }
+✅ Found 0 purchase orders (0 total)
+✅ Found 0 invoices (0 total)
+📧 OPTIONS /api/invoices?page=1&limit=10&date=2025-08-01&month=2025-08 from http://localhost:3000
+🔄 Handling preflight request
+📧 OPTIONS /api/purchaseorders?page=1&limit=10&date=2025-08-01&month=2025-08 from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/invoices?page=1&limit=10&date=2025-08-01&month=2025-08 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/invoices?page=1&limit=10&date=2025-08-01&month=2025-08
+📄 Invoices requested with params: { page: '1', limit: '10', date: '2025-08-01', month: '2025-08' }
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all invoices
+📅 Date filter applied: { '$gte': '2025-07-31', '$lt': '2025-08-31' }
+🔍 Final query filter: { date: { '$gte': '2025-07-31', '$lt': '2025-08-31' } }
+📊 Sort query: { date: -1, _id: -1 }
+📧 GET /api/purchaseorders?page=1&limit=10&date=2025-08-01&month=2025-08 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=10&date=2025-08-01&month=2025-08
+📦 Purchase orders requested with params: { page: '1', limit: '10', date: '2025-08-01', month: '2025-08' }
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-08-01
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-07-31",
+        "$lt": "2025-08-31"
+      }
+    }
+  ]
+}
+📊 Sort query: { date: -1, _id: -1 }
+✅ Found 10 purchase orders (239 total)
+✅ Found 10 invoices (344 total)
+📧 OPTIONS /api/admin/sales-members?page=1&limit=10&sort=-createdAt&from=2025-08-09T18%3A29%3A59.999Z&to=2025-09-07T18%3A29%3A59.999Z from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/admin/sales-members?page=1&limit=10&sort=-createdAt&from=2025-08-09T18%3A29%3A59.999Z&to=2025-09-07T18%3A29%3A59.999Z from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/admin/sales-members?page=1&limit=10&sort=-createdAt&from=2025-08-09T18%3A29%3A59.999Z&to=2025-09-07T18%3A29%3A59.999Z
+📧 OPTIONS /api/admin/sales-members?page=1&limit=10000 from http://localhost:3000
+🔄 Handling preflight request
+📧 OPTIONS /api/invoices?page=1&limit=25&date=2025-09-01&month=2025-09&sortBy=date&sortOrder=desc from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/admin/sales-members?page=1&limit=10000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/admin/sales-members?page=1&limit=10000
+📧 GET /api/invoices?page=1&limit=25&date=2025-09-01&month=2025-09&sortBy=date&sortOrder=desc from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/invoices?page=1&limit=25&date=2025-09-01&month=2025-09&sortBy=date&sortOrder=desc
+📄 Invoices requested with params: {
+  page: '1',
+  limit: '25',
+  date: '2025-09-01',
+  month: '2025-09',
+  sortBy: 'date',
+  sortOrder: 'desc'
+}
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all invoices
+📅 Date filter applied: { '$gte': '2025-08-31', '$lt': '2025-09-30' }
+🔍 Final query filter: { date: { '$gte': '2025-08-31', '$lt': '2025-09-30' } }
+📊 Sort query: { date: -1, _id: -1 }
+✅ Found 0 invoices (0 total)
+📧 GET /api/admin/sales-members?page=1&limit=10000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/admin/sales-members?page=1&limit=10000
+📧 OPTIONS /api/admin/sales-members? from http://localhost:3000
+🔄 Handling preflight request
+📧 OPTIONS /api/invoices-only?date=2025-09-01&limit=1000 from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/admin/sales-members? from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/admin/sales-members?
+📧 GET /api/invoices-only?date=2025-09-01&limit=1000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/invoices-only?date=2025-09-01&limit=1000
+📄 Invoices-only requested with params: { date: '2025-09-01', limit: '1000' }
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all invoices
+📅 Date filter applied: { '$gte': '2025-08-31', '$lt': '2025-09-30' }
+🔍 Final query filter: { date: { '$gte': '2025-08-31', '$lt': '2025-09-30' } }
+📊 Sort query: { date: -1, _id: -1 }
+📧 OPTIONS /api/pi-summary?date=2025-09-01 from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/pi-summary?date=2025-09-01 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/pi-summary?date=2025-09-01
+✅ Found 0 invoices (0 total)
+📧 OPTIONS /api/sales/auth/me from http://localhost:3000
+🔄 Handling preflight request
+📧 OPTIONS /api/invoices?page=1&limit=10&date=2025-09-01&month=2025-09 from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/admin/sales-members?page=1&limit=10000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/admin/sales-members?page=1&limit=10000
+📧 OPTIONS /api/purchaseorders?page=1&limit=10&date=2025-09-01&month=2025-09 from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/sales/auth/me from http://localhost:3000
+👤 Me endpoint requested
+🔍 Token source: cookie
+✅ Token verified for user: admin@gmail.com
+📧 GET /api/invoices?page=1&limit=10&date=2025-09-01&month=2025-09 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/invoices?page=1&limit=10&date=2025-09-01&month=2025-09
+📄 Invoices requested with params: { page: '1', limit: '10', date: '2025-09-01', month: '2025-09' }
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all invoices
+📅 Date filter applied: { '$gte': '2025-08-31', '$lt': '2025-09-30' }
+🔍 Final query filter: { date: { '$gte': '2025-08-31', '$lt': '2025-09-30' } }
+📊 Sort query: { date: -1, _id: -1 }
+📧 GET /api/purchaseorders?page=1&limit=10&date=2025-09-01&month=2025-09 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=10&date=2025-09-01&month=2025-09
+📦 Purchase orders requested with params: { page: '1', limit: '10', date: '2025-09-01', month: '2025-09' }
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-09-01
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-08-31",
+        "$lt": "2025-09-30"
+      }
+    }
+  ]
+}
+📊 Sort query: { date: -1, _id: -1 }
+✅ Found 0 purchase orders (0 total)
+✅ Found 0 invoices (0 total)
+📧 OPTIONS /api/admin/sales-members? from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/admin/sales-members? from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/admin/sales-members?
+📧 OPTIONS /api/admin/sales-members?page=1&limit=10000 from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/admin/sales-members?page=1&limit=10000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/admin/sales-members?page=1&limit=10000
+📧 OPTIONS /api/invoices?page=1&limit=25&date=2025-09-01&month=2025-09&sortBy=date&sortOrder=desc from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/admin/sales-members?page=1&limit=10000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/admin/sales-members?page=1&limit=10000
+📧 GET /api/invoices?page=1&limit=25&date=2025-09-01&month=2025-09&sortBy=date&sortOrder=desc from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/invoices?page=1&limit=25&date=2025-09-01&month=2025-09&sortBy=date&sortOrder=desc
+📄 Invoices requested with params: {
+  page: '1',
+  limit: '25',
+  date: '2025-09-01',
+  month: '2025-09',
+  sortBy: 'date',
+  sortOrder: 'desc'
+}
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all invoices
+📅 Date filter applied: { '$gte': '2025-08-31', '$lt': '2025-09-30' }
+🔍 Final query filter: { date: { '$gte': '2025-08-31', '$lt': '2025-09-30' } }
+📊 Sort query: { date: -1, _id: -1 }
+✅ Found 0 invoices (0 total)
+📧 OPTIONS /api/admin/sales-members?page=1&limit=10&sort=-createdAt&from=2025-08-09T18%3A29%3A59.999Z&to=2025-09-07T18%3A29%3A59.999Z from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/admin/sales-members?page=1&limit=10&sort=-createdAt&from=2025-08-09T18%3A29%3A59.999Z&to=2025-09-07T18%3A29%3A59.999Z from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/admin/sales-members?page=1&limit=10&sort=-createdAt&from=2025-08-09T18%3A29%3A59.999Z&to=2025-09-07T18%3A29%3A59.999Z
+📧 OPTIONS /api/sales/auth/me from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/admin/sales-members?page=1&limit=10000 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/admin/sales-members?page=1&limit=10000
+📧 GET /api/sales/auth/me from http://localhost:3000
+👤 Me endpoint requested
+🔍 Token source: cookie
+✅ Token verified for user: admin@gmail.com
+📧 OPTIONS /api/invoices?page=1&limit=10&date=2025-09-01&month=2025-09 from http://localhost:3000
+🔄 Handling preflight request
+📧 OPTIONS /api/purchaseorders?page=1&limit=10&date=2025-09-01&month=2025-09 from http://localhost:3000
+🔄 Handling preflight request
+📧 GET /api/invoices?page=1&limit=10&date=2025-09-01&month=2025-09 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/invoices?page=1&limit=10&date=2025-09-01&month=2025-09
+📄 Invoices requested with params: { page: '1', limit: '10', date: '2025-09-01', month: '2025-09' }
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all invoices
+📅 Date filter applied: { '$gte': '2025-08-31', '$lt': '2025-09-30' }
+🔍 Final query filter: { date: { '$gte': '2025-08-31', '$lt': '2025-09-30' } }
+📊 Sort query: { date: -1, _id: -1 }
+📧 GET /api/purchaseorders?page=1&limit=10&date=2025-09-01&month=2025-09 from http://localhost:3000
+✅ Authenticated user: admin@gmail.com for: /api/purchaseorders?page=1&limit=10&date=2025-09-01&month=2025-09
+📦 Purchase orders requested with params: { page: '1', limit: '10', date: '2025-09-01', month: '2025-09' }
+👤 User role: admin User ID: 68b15fe8b65488ab71c1b2c6
+👑 Admin user - access to all purchase orders
+📅 Date filter applied for: 2025-09-01
+🔍 Final query filter: {
+  "$and": [
+    {
+      "date": {
+        "$gte": "2025-08-31",
+        "$lt": "2025-09-30"
+      }
+    }
+  ]
+}
+📊 Sort query: { date: -1, _id: -1 }
+✅ Found 0 purchase orders (0 total)
+✅ Found 0 invoices (0 total)

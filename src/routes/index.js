@@ -9,7 +9,7 @@ import {
 } from "../controllers/salesController.js";
 import Invoice from "../models/Invoice.js";
 import PurchaseOrder from "../models/PurchaseOrder.js";
-import adminBackfill from "./adminBackfill.js";
+import { backfillAll } from "../services/zohoBooksBackfillAll.js";
 import {
   addSalesMember,
   deleteSalesMember,
@@ -27,7 +27,6 @@ import {
 } from "../controllers/salesAuthController.js";
 import { requireSalesAuth } from "../middlewares/salesAuth.js";
 
-
 const router = Router();
 
 /* ---------------- Sales Auth Routes (NEW) ---------------- */
@@ -35,38 +34,44 @@ const router = Router();
 router.post("/api/sales/auth/login", loginSales);
 router.post("/api/sales/auth/logout", logoutSales);
 router.get("/api/sales/auth/me", requireSalesAuth, meSales);
-// ^ `me` requires a valid accessToken cookie (or Bearer header)
 
+/* ---------------- Protected Data Routes ---------------- */
+// Read routes (serve from DB; no Zoho calls here) - ALL REQUIRE AUTH
+router.get("/api/invoices", requireSalesAuth, listInvoices(Invoice, PurchaseOrder));
+router.get("/api/invoices-only", requireSalesAuth, listInvoicesOnly(Invoice));
+router.get("/api/pi-summary", requireSalesAuth, listPiSummaryOnly(Invoice, PurchaseOrder));
+router.get("/api/purchaseorders", requireSalesAuth, listPOs(PurchaseOrder));
+router.get("/api/invoices/:id", requireSalesAuth, getInvoiceById(Invoice));
+router.get("/api/purchaseorders/:id", requireSalesAuth, getPurchaseOrderById(PurchaseOrder));
 
-/* ---------------- Existing routes ---------------- */
-// Read routes (serve from DB; no Zoho calls here)
-router.get("/api/invoices", listInvoices(Invoice, PurchaseOrder));
-router.get("/api/invoices-only", listInvoicesOnly(Invoice));
-router.get("/api/pi-summary", listPiSummaryOnly(Invoice, PurchaseOrder));
-router.get("/api/purchaseorders", listPOs(PurchaseOrder));
-router.get("/api/invoices/:id", getInvoiceById(Invoice));
-router.get("/api/purchaseorders/:id", getPurchaseOrderById(PurchaseOrder));
+/* Admin backfill - REQUIRES AUTH */
+router.post("/api/admin/zoho/backfill-all", requireSalesAuth, async (req, res) => {
+  try {
+    const result = await backfillAll();
+    res.json({ status: "OK", ...result });
+  } catch (error) {
+    console.error("Backfill error:", error);
+    res.status(500).json({ 
+      status: "ERROR", 
+      message: error?.message || String(error) 
+    });
+  }
+});
 
-/* Admin backfill */
-router.use("/api", adminBackfill);
-
-/* ---------------- Sales Member routes ---------------- */
-// Optional: protect all /api/admin/* routes (uncomment to enable admin-only)
-// router.use("/api/admin", requireSalesAuth, requireSalesRole("admin"));
-
+/* ---------------- Sales Member routes - ALL REQUIRE AUTH ---------------- */
 // Base: /api/admin/sales-members
 router
   .route("/api/admin/sales-members")
-  .get(listSalesMembers)
-  .post(addSalesMember);
+  .get(requireSalesAuth, listSalesMembers)
+  .post(requireSalesAuth, addSalesMember);
 
 router
   .route("/api/admin/sales-members/:id")
-  .get(getSalesMemberById)
-  .put(updateSalesMember)
-  .delete(deleteSalesMember);
+  .get(requireSalesAuth, getSalesMemberById)
+  .put(requireSalesAuth, updateSalesMember)
+  .delete(requireSalesAuth, deleteSalesMember);
 
 // Quick status toggle
-router.patch("/api/admin/sales-members/:id/status", updateSalesMemberStatus);
+router.patch("/api/admin/sales-members/:id/status", requireSalesAuth, updateSalesMemberStatus);
 
 export default router;

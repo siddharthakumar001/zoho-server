@@ -138,7 +138,11 @@ export const updateSalesMember = async (req, res, next) => {
 
     await doc.save();
 
-    res.json({ message: 'Sales member updated', member: toPublic(doc.toObject()) });
+    res.json({ 
+      success: true,
+      message: 'Sales member updated successfully', 
+      data: toPublic(doc.toObject()) 
+    });
   } catch (err) {
     err.status = err.status || 500;
     next(err);
@@ -159,8 +163,9 @@ export const listSalesMembers = async (req, res, next) => {
       sortOrder = 'desc',    // asc | desc
     } = req.query;
 
+    // Improved pagination with reasonable limits
     const p = Math.max(1, Number(page));
-    const l = Math.max(1, Math.min(100, Number(limit)));
+    const l = Math.max(1, Math.min(50, Number(limit))); // Max 50 items per page
 
     const filter = {};
     if (search) {
@@ -175,7 +180,6 @@ export const listSalesMembers = async (req, res, next) => {
       filter.isActive = isActive === 'true';
     }
 
-
     const sort = { [sortBy]: sortOrder === 'asc' ? 1 : -1 };
 
     const [items, count] = await Promise.all([
@@ -187,9 +191,21 @@ export const listSalesMembers = async (req, res, next) => {
       SalesMember.countDocuments(filter),
     ]);
 
-    // console.log("itemsitems", items)
+    // Build consistent pagination metadata
+    const totalPages = Math.max(1, Math.ceil(count / l));
+    const pagination = {
+      page: p,
+      limit: l,
+      total: count,
+      totalPages,
+      hasNextPage: p < totalPages,
+      hasPrevPage: p > 1
+    };
 
     res.json({
+      pagination,
+      data: items.map(toPublic),
+      // Keep backward compatibility
       page: p,
       limit: l,
       count,

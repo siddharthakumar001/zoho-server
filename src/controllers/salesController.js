@@ -126,16 +126,42 @@ function buildDateNormalizationStage(field = "date") {
 }
 
 /**
-* Common facet to paginate + compute count & total in ONE roundtrip.
+* Common pagination helper with consistent limits and validation
 */
+function getPaginationParams(req, defaultLimit = 10, maxLimit = 100) {
+  const page = Math.max(1, parseInt(req.query.page, 10) || 1);
+  const limit = Math.max(1, Math.min(maxLimit, parseInt(req.query.limit, 10) || defaultLimit));
+  const skip = (page - 1) * limit;
+  return { page, limit, skip };
+}
 
-function buildFacet(page, limit) {
-  const skip = Math.max(0, (Number(page) || 1) - 1) * (Number(limit) || 10);
-  const lim = Math.max(1, Number(limit) || 10);
+/**
+* Common pagination metadata response helper
+*/
+function buildPaginationMeta(page, limit, total) {
+  const totalPages = Math.max(1, Math.ceil(total / limit));
+  return {
+    page,
+    limit,
+    total,
+    totalPages,
+    hasNextPage: page < totalPages,
+    hasPrevPage: page > 1
+  };
+}
+
+/**
+* Common facet to paginate + compute count & total in ONE roundtrip with optimized limits.
+*/
+function buildFacet(page, limit, maxLimit = 100) {
+  // Ensure limits are reasonable for performance
+  const safePage = Math.max(1, parseInt(page, 10) || 1);
+  const safeLimit = Math.max(1, Math.min(maxLimit, parseInt(limit, 10) || 10));
+  const skip = (safePage - 1) * safeLimit;
 
   return {
     $facet: {
-      data: [{ $skip: skip }, { $limit: lim }],
+      data: [{ $skip: skip }, { $limit: safeLimit }],
       stats: [
         {
           $group: {
@@ -167,9 +193,8 @@ export const listInvoices = (Invoice = InvoiceModel, PurchaseOrder = PurchaseOrd
       // Only build a name regex if NOT "All"
       const nameRegex = !isAll ? makeNameRegex(salesperson) : null;
 
-      const page = req.query.page;
-      const limit = req.query.limit;
-
+      // Get pagination parameters with reasonable defaults
+      const { page, limit } = getPaginationParams(req, 10, 50); // Default: 10, Max: 50
 
       // Base match: month range
 
@@ -186,12 +211,12 @@ export const listInvoices = (Invoice = InvoiceModel, PurchaseOrder = PurchaseOrd
         ];
       }
 
-      // ==== Main paged pipeline (unchanged) ====
+      // ==== Main paged pipeline with improved pagination ====
       const pipeline = [
         buildDateNormalizationStage('date'),
         { $match: invoiceMatch },
         { $sort: { dateAsDate: -1, _id: -1 } },
-        buildFacet(page, limit),
+        buildFacet(page, limit, 50), // Max 50 items per page for performance
       ];
 
 
@@ -200,8 +225,10 @@ export const listInvoices = (Invoice = InvoiceModel, PurchaseOrder = PurchaseOrd
       // console.log("result check invoice",result[0].length)
 
       const { data = [], stats = [] } = result[0] || {};
-
       const meta = stats[0] || { count: 0, total: 0 };
+      
+      // Build consistent pagination metadata
+      const pagination = buildPaginationMeta(page, limit, meta.count);
 
       // ... (rest of your function stays the same)
       // NOTE: invOverallAgg and invByPiAgg already reuse `invoiceMatch`,
@@ -473,8 +500,9 @@ export const listInvoices = (Invoice = InvoiceModel, PurchaseOrder = PurchaseOrd
 
       res.json({
         filters: { month: datePrefix, personName: isAll ? 'all' : salesperson },
-        count: meta.count,
-        total: meta.total,
+        pagination,
+        count: meta.count, // Keep for backward compatibility
+        total: meta.total, // Keep for backward compatibility
         data,
         piSummary,
         piRollup,
@@ -503,8 +531,8 @@ export const listPiSummaryOnly = (Invoice = InvoiceModel, PurchaseOrder = Purcha
       // Only build a name regex if NOT "All"
       const nameRegex = !isAll ? makeNameRegex(salesperson) : null;
 
-      const page = req.query.page;
-      const limit = req.query.limit;
+      // Get pagination parameters with reasonable defaults for PI summary
+      const { page, limit } = getPaginationParams(req, 25, 100); // Default: 25, Max: 100
 
       // Base match: month range
       const invoiceMatch = {
@@ -519,17 +547,20 @@ export const listPiSummaryOnly = (Invoice = InvoiceModel, PurchaseOrder = Purcha
         ];
       }
 
-      // ===== Main paged pipeline (same shape as listInvoices) =====
+      // ===== Main paged pipeline with improved pagination =====
       const pipeline = [
         buildDateNormalizationStage('date'),
         { $match: invoiceMatch },
         { $sort: { dateAsDate: -1, _id: -1 } },
-        buildFacet(page, limit),
+        buildFacet(page, limit, 100), // Max 100 items for PI summary
       ];
 
       const result = await Invoice.aggregate(pipeline);
       const { data = [], stats = [] } = result[0] || {};
       const meta = stats[0] || { count: 0, total: 0 };
+
+      // Build consistent pagination metadata
+      const pagination = buildPaginationMeta(page, limit, meta.count);
 
       // ===== Roll up PI summary from the paged data (same approach) =====
       const piNumbers = [...new Set(data.map(d => d.cf_sales_order_number).filter(Boolean))];
@@ -593,14 +624,15 @@ export const listPiSummaryOnly = (Invoice = InvoiceModel, PurchaseOrder = Purcha
         });
       }
 
-      // ===== Response: ONLY piSummary, nothing else =====
+      // ===== Response: Optimized PI Summary with pagination =====
       res.json({
         filters: { month: datePrefix, personName: isAll ? 'all' : salesperson },
-        page: Number(page) || 1,
-        limit: Number(limit) || 25,
-        count: meta.count,     // same count your invoices facet returns
-        total: meta.total,     // kept for parity; remove if you don't need it
-        data: piSummary,       // <-- only piSummary returned
+        pagination,
+        page: pagination.page,     // Keep for backward compatibility
+        limit: pagination.limit,   // Keep for backward compatibility
+        count: meta.count,         // Keep for backward compatibility
+        total: meta.total,         // Keep for backward compatibility
+        data: piSummary,           // <-- only piSummary returned
       });
     } catch (err) {
       err.status = err.status || 500;
@@ -622,9 +654,8 @@ export const listInvoicesOnly = (Invoice = InvoiceModel) =>
       // Detect admin "All"
       const isAll = !personName || /^(all|\*)$/i.test(String(personName).trim());
 
-      const page = Math.max(1, parseInt(req.query.page, 10) || 1);
-      const limit = Math.max(1, Math.min(500, parseInt(req.query.limit, 10) || 25));
-      const skip = (page - 1) * limit;
+      // Get pagination parameters with reasonable defaults
+      const { page, limit, skip } = getPaginationParams(req, 25, 100); // Default: 25, Max: 100
 
       // --------- Filters ----------
       const match = {
@@ -703,17 +734,20 @@ export const listInvoicesOnly = (Invoice = InvoiceModel) =>
       const doc = agg?.[0] || { data: [], total: 0 };
 
       const total = Number(doc.total || 0);
-      const pages = Math.max(1, Math.ceil(total / limit));
+      const pagination = buildPaginationMeta(page, limit, total);
       const items = Array.isArray(doc.data) ? doc.data : [];
 
-      // --------- Response (invoices only) ----------
+      // --------- Response (invoices only) with improved pagination ----------
       res.json({
+        pagination,
+        data: items,
+        // Keep backward compatibility
         raw: {
           data: items,
           page,
           limit,
           total,
-          pages,
+          pages: pagination.totalPages,
           filters: {
             month: datePrefix,                 // e.g. "2025-08"
             personName: isAll ? 'all' : personName,
@@ -750,7 +784,12 @@ export const getInvoiceById = (Invoice = InvoiceModel) => async (req, res, next)
     }
 
     if (!doc) {
-      return res.status(404).json({ message: 'Invoice not found' });
+      return res.status(404).json({ 
+        message: 'Invoice not found',
+        details: 'Searched by both Zoho ID and MongoDB ObjectId formats',
+        searchedId: id,
+        idFormat: /^[0-9a-fA-F]{24}$/.test(id) ? 'MongoDB ObjectId' : 'Zoho ID'
+      });
     }
 
     return res.json({ invoice: doc });
@@ -783,7 +822,12 @@ export const getPurchaseOrderById =
         }
 
         if (!doc) {
-          return res.status(404).json({ message: "Purchase order not found" });
+          return res.status(404).json({ 
+            message: "Purchase order not found",
+            details: 'Searched by both Zoho ID and MongoDB ObjectId formats',
+            searchedId: id,
+            idFormat: /^[0-9a-fA-F]{24}$/.test(id) ? 'MongoDB ObjectId' : 'Zoho ID'
+          });
         }
 
         return res.json({ purchaseorder: doc });
@@ -799,10 +843,8 @@ export const listPOs = (PurchaseOrder) => async (req, res, next) => {
     // validateParams requires ?date=YYYY-MM-DD (any day of that month is fine)
     const { salesperson, isAll, start, end, datePrefix } = validateParams(req);
 
-    // page/limit (accept per_page alias)
-    const page = Math.max(1, parseInt(req.query.page, 10) || 1);
-    const limit = Math.max(1, Math.min(1000, parseInt(req.query.limit ?? req.query.per_page, 10) || 25));
-    const skip = (page - 1) * limit;
+    // Get pagination parameters with reasonable defaults
+    const { page, limit, skip } = getPaginationParams(req, 25, 100); // Default: 25, Max: 100
 
     // Base month range
     const match = { dateAsDate: { $gte: start, $lt: end } };
@@ -838,14 +880,17 @@ export const listPOs = (PurchaseOrder) => async (req, res, next) => {
     const doc = agg?.[0] || { data: [], total: 0 };
 
     const total = Number(doc.total || 0);
-    const pages = Math.max(1, Math.ceil(total / limit));
+    const pagination = buildPaginationMeta(page, limit, total);
 
     res.json({
+      pagination,
+      data: doc.data || [],
+      // Keep backward compatibility
       items: doc.data || [],
       page,
       limit,
       total,
-      pages,
+      pages: pagination.totalPages,
       filters: {
         month: datePrefix,
         personName: isAll ? "all" : salesperson,
